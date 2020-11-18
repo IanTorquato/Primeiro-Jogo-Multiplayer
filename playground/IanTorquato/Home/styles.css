@@ -1,0 +1,19 @@
+html,
+body {
+	box-sizing: border-box;
+	display: flex;
+	height: 100%;
+	justify-content: center;
+	margin: 0;
+	padding: 0;
+}
+
+canvas#screen {
+	border: 8px solid #ccc;
+	height: 400px;
+	image-rendering: pixelated;
+	image-rendering: crisp-edges;
+	image-rendering: --moz-crisp-edges;
+	margin-top: 40px;
+	width: 400px;
+}

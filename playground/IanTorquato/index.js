@@ -12,12 +12,18 @@ app.use(express.static('public'))
 
 const game = createGame()
 
-console.log(game.state)
-
 sockets.on('connection', socket => {
-	console.log(`> Player connected on server with id: ${socket.id}`)
+	const playerId = socket.id
+	console.log(`> Player connected: ${playerId}`)
+	
+	game.addPlayer({ playerId })
 	
 	socket.emit('setup', game.state)
+	
+	socket.on('disconnect', () => {
+		game.removePlayer({ playerId })
+		console.log(`> Player disconnected: ${playerId}`)
+	})
 })
 
 server.listen(3000, () => console.log('--> Server runing on port 3000 <--'))

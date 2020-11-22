@@ -1,19 +1,23 @@
 import express from 'express'
-// import http from 'http'
+import http from 'http'
+import socketio from 'socket.io'
+
 import createGame from './public/functions/game.js'
 
 const app = express()
-// const server = http.createServer(app)
+const server = http.createServer(app)
+const sockets = socketio(server)
 
 app.use(express.static('public'))
 
 const game = createGame()
-game.addPlayer({ playerId: 'Ian', playerX: 0, playerY: 0 })
-game.addPlayer({ playerId: 'Ana', playerX: 4, playerY: 0 })
-game.addFruit({ fruitId: 'Pera', fruitX: 4, fruitY: 2 })
-game.addFruit({ fruitId: 'Banana', fruitX: 8, fruitY: 4 })
-game.movePlayer({ playerId: 'Ana', keyPressed: 'ArrowRight' })
 
 console.log(game.state)
 
-app.listen(3000, () => console.log('--> Server runing on port 3333 <--'))
+sockets.on('connection', socket => {
+	console.log(`> Player connected on server with id: ${socket.id}`)
+	
+	socket.emit('setup', game.state)
+})
+
+server.listen(3000, () => console.log('--> Server runing on port 3000 <--'))

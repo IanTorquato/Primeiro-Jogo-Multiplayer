@@ -2,10 +2,17 @@ export default function createGame() {
 	const state = {
 		players: {},
 		fruits: {},
-		screen: { height: 16, width: 16 }
+		screen: { height: 15, width: 15 }
 	}
 	
-	function addPlayer({ playerId, playerX, playerY }) { state.players[playerId] = { x: playerX, y: playerY } }
+	function setState(newState) { Object.assign(state, newState) }
+	
+	function addPlayer({ playerId, playerX, playerY }) {
+		const x = playerX || Math.floor(Math.random() * state.screen.width)
+		const y = playerY || Math.floor(Math.random() * state.screen.height)
+		
+		state.players[playerId] = { x, y }
+	}
 	
 	function removePlayer({ playerId }) { delete state.players[playerId] }
 	
@@ -26,20 +33,24 @@ export default function createGame() {
 			
 			// Mover para baixo
 			ArrowDown(player) {
-				player.y = Math.min(player.y + 1, state.screen.height - 1)
+				player.y = Math.min(player.y + 1, state.screen.height)
+				
 			},
 			
 			s(player) {
-				player.y = Math.min(player.y + 1, state.screen.height - 1)
+				player.y = Math.min(player.y + 1, state.screen.height)
+				
 			},
 			
 			// Mover para a direita
 			ArrowRight(player) {
-				player.x = Math.min(player.x + 1, state.screen.width - 1)
+				player.x = Math.min(player.x + 1, state.screen.width)
+				
 			},
 			
 			d(player) {
-				player.x = Math.min(player.x + 1, state.screen.width - 1)
+				player.x = Math.min(player.x + 1, state.screen.width)
+				
 			},
 			
 			// Mover para a esquerda
@@ -73,5 +84,5 @@ export default function createGame() {
 		}
 	}
 	
-	return { addPlayer, removePlayer, movePlayer, addFruit, removeFruit, state }
+	return { addPlayer, removePlayer, movePlayer, addFruit, removeFruit, state, setState }
 }

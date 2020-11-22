@@ -15,5 +15,5 @@
     "dev": "nodemon index.js"
   },
   "type": "module",
-  "version": "1.0"
+  "version": "1.0.0"
 }

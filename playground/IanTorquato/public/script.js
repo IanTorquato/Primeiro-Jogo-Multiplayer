@@ -16,3 +16,13 @@ socket.on('connect', () => {
 })
 
 socket.on('setup', state => { game.setState(state) })
+
+socket.on('add-player', command => {
+	console.log(`Receiving ${command.type} -> ${command.playerId}`)
+	game.addPlayer(command)
+})
+
+socket.on('remove-player', command => {
+	console.log(`Receiving ${command.type} -> ${command.playerId}`)
+	game.removePlayer(command)
+})

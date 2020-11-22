@@ -33,6 +33,8 @@ export default function createGame() {
 	function removeFruit({ fruitId }) { delete state.fruits[fruitId] }
 	
 	function movePlayer(command) {
+		notifyAll(command)
+		
 		const acceptedMoves = {
 			// Mover para cima
 			ArrowUp(player) {

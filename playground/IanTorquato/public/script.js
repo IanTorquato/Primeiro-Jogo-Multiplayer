@@ -19,6 +19,7 @@ socket.on('setup', state => {
 	
 	keyboardListener.registerPlayerId(socket.id)
 	keyboardListener.subscribe(game.movePlayer)
+	keyboardListener.subscribe(command => socket.emit('move-player', command))
 })
 
 socket.on('add-player', command => {
@@ -29,4 +30,12 @@ socket.on('add-player', command => {
 socket.on('remove-player', command => {
 	console.log(`Receiving ${command.type} -> ${command.playerId}`)
 	game.removePlayer(command)
+})
+
+socket.on('move-player', command => {
+	console.log(`Receiving ${command.type} -> ${command.playerId}`)
+	
+	if (socket.id !== command.playerId) {
+		game.movePlayer(command)
+	}
 })

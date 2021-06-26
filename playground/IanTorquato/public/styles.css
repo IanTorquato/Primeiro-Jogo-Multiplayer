@@ -1,21 +1,21 @@
 html, body {
-	background-color: #222;
-	box-sizing: border-box;
-	display: flex;
-	height: 100%;
-	justify-content: center;
-	margin: 0;
-	padding: 0;
+  background-color: #222;
+  box-sizing: border-box;
+  display: flex;
+  height: 100%;
+  justify-content: center;
+  margin: 0;
+  padding: 0;
 }
 
 canvas#screen {
-	background-color: #fff;
-	border: 8px solid #bbb;
-	border-radius: 8px;
-	height: 80vh;
-	image-rendering: pixelated;
-	image-rendering: crisp-edges;
-	image-rendering: --moz-crisp-edges;
-	margin-top: 40px;
-	width: 80vh;
+  background-color: #fff;
+  border: 8px solid #bbb;
+  border-radius: 8px;
+  height: 80vh;
+  image-rendering: pixelated;
+  image-rendering: crisp-edges;
+  image-rendering: --moz-crisp-edges;
+  margin-top: 40px;
+  width: 80vh;
 }
